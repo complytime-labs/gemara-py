@@ -39,17 +39,17 @@ print(catalog.metadata.id)
 
 ## Regenerating Types
 
-Requires [CUE](https://cuelang.org/) v0.17+ and development dependencies:
+Requires [CUE](https://cuelang.org/) v0.17+, [Task](https://taskfile.dev/) v3+, and development dependencies:
 
 ```bash
 pip install -e ".[dev]"
-make generate
+task generate
 ```
 
 ## Development
 
 ```bash
 pip install -e ".[dev]"
-make test
-make lint
+task test
+task lint
 ```
