@@ -144,7 +144,10 @@ def generate(version: str) -> None:
     module_name = version_to_module_name(version)
     output_dir = os.path.join("gemara_py", "types", module_name)
     os.makedirs(output_dir, exist_ok=True)
-    output_file = os.path.join(output_dir, "__init__.py")
+    output_file = os.path.join(output_dir, "types.py")
+    init_file = os.path.join(output_dir, "__init__.py")
+    with open(init_file, "w") as f:
+        f.write(f"from gemara_py.types.{module_name}.types import *  # noqa: F401, F403\n")
 
     with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
         json.dump(merged, f, indent=2)
