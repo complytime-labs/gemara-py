@@ -7,7 +7,6 @@ Example: python3 generate.py v1.3.0
 
 import json
 import os
-import re
 import subprocess
 import sys
 import tempfile
