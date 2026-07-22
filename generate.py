@@ -40,7 +40,11 @@ def export_definition(defname: str, version: str) -> dict | None:
         print(f"  WARN: skipping {defname}: {result.stderr.strip()}", file=sys.stderr)
         return None
     raw = result.stdout.replace("%23", "")
-    return json.loads(raw)
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError as e:
+        print(f"  WARN: skipping {defname}: invalid JSON: {e}", file=sys.stderr)
+        return None
 
 
 def merge_schemas(definitions: list[str], version: str) -> dict:
@@ -88,17 +92,26 @@ def flatten_struct_embedding(merged: dict) -> None:
                 changed = True
 
 
+def _replace_refs(obj, targets: dict):
+    """Recursively replace $ref objects whose value matches a target with the inlined schema."""
+    if isinstance(obj, dict):
+        if list(obj.keys()) == ["$ref"] and obj["$ref"] in targets:
+            return targets[obj["$ref"]]
+        return {k: _replace_refs(v, targets) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_replace_refs(item, targets) for item in obj]
+    return obj
+
+
 def inline_dot_qualified_defs(merged: dict) -> None:
     dot_defs = {k: v for k, v in merged["$defs"].items() if "." in k}
+    targets = {}
     for dot_name, dot_val in dot_defs.items():
-        raw = json.dumps(merged)
-        ref_pattern = f"#/$defs/{dot_name}"
+        targets[f"#/$defs/{dot_name}"] = dot_val
         encoded_name = dot_name.replace('"', "%22")
-        encoded_ref = f"#/$defs/{encoded_name}"
-        raw = raw.replace(json.dumps({"$ref": ref_pattern}), json.dumps(dot_val))
-        raw = raw.replace(json.dumps({"$ref": encoded_ref}), json.dumps(dot_val))
-        merged.clear()
-        merged.update(json.loads(raw))
+        targets[f"#/$defs/{encoded_name}"] = dot_val
+    merged["$defs"] = _replace_refs(merged["$defs"], targets)
+    for dot_name in dot_defs:
         merged["$defs"].pop(dot_name, None)
 
 
