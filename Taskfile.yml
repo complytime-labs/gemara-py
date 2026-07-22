@@ -1,0 +1,23 @@
+version: "3"
+
+vars:
+  SPECVERSIONS: v1.0.0 v1.2.0 v1.3.0
+
+tasks:
+  generate:
+    desc: Generate Pydantic models from Gemara CUE schemas
+    cmds:
+      - for: { var: SPECVERSIONS }
+        cmd: python3 generate.py {{.ITEM}}
+
+  test:
+    desc: Run tests
+    cmd: python3 -m pytest tests/ -v
+
+  lint:
+    desc: Run linter
+    cmd: ruff check .
+
+  format:
+    desc: Format code
+    cmd: ruff format .
