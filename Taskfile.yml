@@ -8,16 +8,16 @@ tasks:
     desc: Generate Pydantic models from Gemara CUE schemas
     cmds:
       - for: { var: SPECVERSIONS }
-        cmd: python3 generate.py {{.ITEM}}
+        cmd: uv run python3 generate.py {{.ITEM}}
 
   test:
     desc: Run tests
-    cmd: python3 -m pytest tests/ -v
+    cmd: uv run pytest tests/ -v
 
   lint:
     desc: Run linter
-    cmd: ruff check .
+    cmd: uv run ruff check .
 
   format:
     desc: Format code
-    cmd: ruff format .
+    cmd: uv run ruff format .

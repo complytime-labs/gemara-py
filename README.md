@@ -42,14 +42,29 @@ print(catalog.metadata.id)
 Requires [CUE](https://cuelang.org/) v0.17+, [Task](https://taskfile.dev/) v3+, and development dependencies:
 
 ```bash
-pip install -e ".[dev]"
+uv sync --dev
 task generate
 ```
 
 ## Development
 
 ```bash
-pip install -e ".[dev]"
+uv sync --dev
 task test
 task lint
 ```
+
+## Releasing
+
+Releases are automated via GitHub Actions:
+
+1. Merge PRs to `main` -- release-drafter accumulates draft release notes
+2. Go to [GitHub Releases](https://github.com/complytime-labs/gemara-py/releases)
+3. Review the draft, confirm the tag (e.g., `v0.0.2`), and publish
+4. Publishing triggers the PyPI publish workflow
+
+### TestPyPI
+
+To publish a test release, go to Actions > "Publish to TestPyPI" > Run workflow.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for maintainer setup (trusted publishers, environments).
