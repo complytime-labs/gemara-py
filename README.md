@@ -42,14 +42,14 @@ print(catalog.metadata.id)
 Requires [CUE](https://cuelang.org/) v0.17+, [Task](https://taskfile.dev/) v3+, and development dependencies:
 
 ```bash
-pip install -e ".[dev]"
+uv sync --dev
 task generate
 ```
 
 ## Development
 
 ```bash
-pip install -e ".[dev]"
+uv sync --dev
 task test
 task lint
 ```
