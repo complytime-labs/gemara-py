@@ -23,6 +23,7 @@ dev = [
 include = ["gemara_py*"]
 
 [tool.setuptools-scm]
+fallback_version = "0.0.0"
 
 [tool.ruff]
 target-version = "py311"
