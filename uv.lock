@@ -108,7 +108,7 @@ dependencies = [
     { name = "pydantic" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "datamodel-code-generator" },
     { name = "pytest" },
@@ -117,14 +117,15 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "datamodel-code-generator", marker = "extra == 'dev'" },
-    { name = "pydantic", specifier = ">=2.0" },
-    { name = "pytest", marker = "extra == 'dev'" },
-    { name = "pyyaml", marker = "extra == 'dev'" },
-    { name = "ruff", marker = "extra == 'dev'" },
+requires-dist = [{ name = "pydantic", specifier = ">=2.0" }]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "datamodel-code-generator" },
+    { name = "pytest" },
+    { name = "pyyaml" },
+    { name = "ruff" },
 ]
-provides-extras = ["dev"]
 
 [[package]]
 name = "genson"
