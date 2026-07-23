@@ -79,6 +79,10 @@ def test_fixture_round_trip(version, module_name, type_name, fixture_file):
 
 @pytest.mark.parametrize("version,module_name", VERSIONS)
 def test_metadata_fields(version, module_name):
+    fixture_path = CUE_CACHE / f"gemara@{version}" / "test" / "test-data" / "good-ccc.yaml"
+    if not fixture_path.exists():
+        pytest.skip(f"Fixture good-ccc.yaml not available for {version}")
+
     mod = _get_version_module(module_name)
     _rebuild_models(mod)
 
