@@ -67,13 +67,4 @@ Releases are automated via GitHub Actions:
 
 To publish a test release, go to Actions > "Publish to TestPyPI" > Run workflow.
 
-### Trusted Publisher Setup (one-time)
-
-On [pypi.org](https://pypi.org/manage/project/gemara-py/settings/publishing/)
-and [test.pypi.org](https://test.pypi.org/manage/project/gemara-py/settings/publishing/),
-add a trusted publisher with:
-
-- **Owner:** `complytime`
-- **Repository:** `gemara-py`
-- **Workflow:** `publish-pypi.yml` (PyPI) or `publish-testpypi.yml` (TestPyPI)
-- **Environment:** `pypi` or `testpypi`
+See [CONTRIBUTING.md](CONTRIBUTING.md) for maintainer setup (trusted publishers, environments).
