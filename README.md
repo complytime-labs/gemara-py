@@ -1,9 +1,19 @@
 # gemara-py
 
+[![PyPI](https://img.shields.io/pypi/v/gemara-py)](https://pypi.org/project/gemara-py/)
+[![Python](https://img.shields.io/pypi/pyversions/gemara-py)](https://pypi.org/project/gemara-py/)
+[![License](https://img.shields.io/github/license/complytime-labs/gemara-py)](LICENSE)
+
 Gemara types as Pydantic models, generated from the
 [Gemara CUE schemas](https://github.com/gemaraproj/gemara).
 
 ## Installation
+
+```bash
+uv add gemara-py
+```
+
+Or with pip:
 
 ```bash
 pip install gemara-py

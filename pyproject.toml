@@ -11,6 +11,11 @@ license = "Apache-2.0"
 requires-python = ">=3.11"
 dependencies = ["pydantic>=2.0"]
 
+[project.urls]
+Homepage = "https://github.com/complytime-labs/gemara-py"
+Repository = "https://github.com/complytime-labs/gemara-py"
+Issues = "https://github.com/complytime-labs/gemara-py/issues"
+
 [dependency-groups]
 dev = [
     "datamodel-code-generator",
