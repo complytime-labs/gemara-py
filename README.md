@@ -1,5 +1,8 @@
 # gemara-py
 
+**This repository has been archived. Development is continued in the upstream version located at [`gemaraproj/gemara-python`](https://github.com/gemaraproj/gemara-python)**
+
+
 [![PyPI](https://img.shields.io/pypi/v/gemara-py)](https://pypi.org/project/gemara-py/)
 [![Python](https://img.shields.io/pypi/pyversions/gemara-py)](https://pypi.org/project/gemara-py/)
 [![License](https://img.shields.io/github/license/complytime-labs/gemara-py)](LICENSE)
