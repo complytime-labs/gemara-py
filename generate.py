@@ -11,7 +11,6 @@ import subprocess
 import sys
 import tempfile
 
-
 CUE_PACKAGE = "github.com/gemaraproj/gemara"
 
 
@@ -35,6 +34,7 @@ def export_definition(defname: str, version: str) -> dict | None:
         ["cue", "def", "-e", defname, "--out", "jsonschema", f"{CUE_PACKAGE}@{version}"],
         capture_output=True,
         text=True,
+        check=False,
     )
     if result.returncode != 0:
         print(f"  WARN: skipping {defname}: {result.stderr.strip()}", file=sys.stderr)
@@ -160,7 +160,7 @@ def generate(version: str) -> None:
     output_file = os.path.join(output_dir, "types.py")
     init_file = os.path.join(output_dir, "__init__.py")
     with open(init_file, "w") as f:
-        f.write(f"from gemara_py.types.{module_name}.types import *  # noqa: F401, F403\n")
+        f.write(f"from gemara_py.types.{module_name}.types import *\n")
 
     with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
         json.dump(merged, f, indent=2)
