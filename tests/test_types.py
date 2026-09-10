@@ -36,7 +36,7 @@ def _rebuild_models(mod):
         if isinstance(obj, type) and issubclass(obj, (BaseModel, RootModel)) and obj not in (BaseModel, RootModel):
             try:
                 obj.model_rebuild(_types_namespace=ns)
-            except Exception:
+            except (TypeError, AttributeError, NameError):
                 pass
 
 
